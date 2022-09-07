@@ -1,0 +1,13 @@
+/Users/mahummel/Desktop/C#/Classes/Classes/bin/Debug/netcoreapp3.1/Classes.deps.json
+/Users/mahummel/Desktop/C#/Classes/Classes/bin/Debug/netcoreapp3.1/Classes.runtimeconfig.json
+/Users/mahummel/Desktop/C#/Classes/Classes/bin/Debug/netcoreapp3.1/Classes.runtimeconfig.dev.json
+/Users/mahummel/Desktop/C#/Classes/Classes/bin/Debug/netcoreapp3.1/Classes.dll
+/Users/mahummel/Desktop/C#/Classes/Classes/bin/Debug/netcoreapp3.1/Classes.pdb
+/Users/mahummel/Desktop/C#/Classes/Classes/obj/Debug/netcoreapp3.1/Classes.csproj.AssemblyReference.cache
+/Users/mahummel/Desktop/C#/Classes/Classes/obj/Debug/netcoreapp3.1/Classes.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mahummel/Desktop/C#/Classes/Classes/obj/Debug/netcoreapp3.1/Classes.AssemblyInfoInputs.cache
+/Users/mahummel/Desktop/C#/Classes/Classes/obj/Debug/netcoreapp3.1/Classes.AssemblyInfo.cs
+/Users/mahummel/Desktop/C#/Classes/Classes/obj/Debug/netcoreapp3.1/Classes.csproj.CoreCompileInputs.cache
+/Users/mahummel/Desktop/C#/Classes/Classes/obj/Debug/netcoreapp3.1/Classes.dll
+/Users/mahummel/Desktop/C#/Classes/Classes/obj/Debug/netcoreapp3.1/Classes.pdb
+/Users/mahummel/Desktop/C#/Classes/Classes/obj/Debug/netcoreapp3.1/Classes.genruntimeconfig.cache
