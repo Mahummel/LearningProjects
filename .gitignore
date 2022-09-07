@@ -61,3 +61,8 @@ tempbin/
 
 # TS files
 dist/**/*
+
+# Python Data Files
+*.csv
+*.pdf
+*.png
