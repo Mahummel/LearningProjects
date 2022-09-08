@@ -1,5 +1,5 @@
 
-// Imports used in hackerrank;
+// Imports used in hackerrank, Unused are there so i'm restricted to only what website allows;
 import java.io.*;
 import java.math.*;
 import java.security.*;
@@ -304,43 +304,89 @@ class Result {
     return "Cat A";
   }
 
-
   /**
-   * Definition of magic square: 
-   *  n x n matrix of distinct positive integers from 1 to n^2, where the sum of 
-   *  any row, column, or diagonal of length n is always equal to the same number;
+   * Definition of magic square:
+   * n x n matrix of distinct positive integers from 1 to n^2, where the sum of
+   * any row, column, or diagonal of length n is always equal to the same number;
    * 
-   *  Solution combinations solved by hand, (all are rotation/symmetric transformation of first combination)
+   * Solution combinations solved by hand, (all are rotation/symmetric
+   * transformation of first combination)
    * 
    * @param s 3x3 matrix of DISTINCT numbers [1-9];
    * @return
    */
   public static int formingMagicSquare(List<List<Integer>> s) {
     int[][] solutionCombinations = {
-      {2,7,6,9,5,1,4,3,8}, 
-      {4,9,2,3,5,7,8,1,6}, 
-      {8,3,4,1,5,9,6,7,2}, 
-      {6,1,8,7,5,3,2,9,4}, 
-      {6,7,2,1,5,9,8,3,4}, 
-      {2,9,4,7,5,3,6,1,8}, 
-      {4,3,8,9,5,1,2,7,6}, 
-      {8,1,6,3,5,7,4,9,2}
+        { 2, 7, 6, 9, 5, 1, 4, 3, 8 },
+        { 4, 9, 2, 3, 5, 7, 8, 1, 6 },
+        { 8, 3, 4, 1, 5, 9, 6, 7, 2 },
+        { 6, 1, 8, 7, 5, 3, 2, 9, 4 },
+        { 6, 7, 2, 1, 5, 9, 8, 3, 4 },
+        { 2, 9, 4, 7, 5, 3, 6, 1, 8 },
+        { 4, 3, 8, 9, 5, 1, 2, 7, 6 },
+        { 8, 1, 6, 3, 5, 7, 4, 9, 2 }
     };
 
     Integer minError = null;
-    for(int[] solution: solutionCombinations) {
+    for (int[] solution : solutionCombinations) {
       int sum = 0;
       for (int i = 0; i < s.size(); i++) {
         for (int j = 0; j < s.size(); j++) {
-          System.out.println(solution[((i * 3) + j)]);
           sum += Math.abs(solution[((i * 3) + j)] - s.get(i).get(j));
         }
       }
-      if (minError == null) minError = sum;
-      if (sum < minError) minError = sum;
+      if (minError == null)
+        minError = sum;
+      if (sum < minError)
+        minError = sum;
     }
-    
+
     return minError;
+  }
+
+  /**
+   * Given an array of integers,
+   * find the longest subarray where the absolute difference between any two
+   * elements
+   * is less than or equal to 1.
+   * 
+   * Theoretically O(N) time if we can sort and analyze within one sweep
+   * Current O(N + k) where k is size of map;
+   * 
+   * @param a - list of integers to sort through;
+   * @return size of list of longets subarray;
+   */
+  public static int pickingNumbers(List<Integer> a) {
+
+    Map<Integer, Integer> sets = new HashMap<Integer, Integer>();
+    for (int number : a) {
+      if (sets.containsKey(number)) {
+        sets.put(number, sets.get(number) + 1);
+      } else {
+        sets.put(number, 1);
+      }
+    }
+
+    Integer max = null;
+    for (Map.Entry<Integer, Integer> item : sets.entrySet()) {
+      int sumPlus = item.getValue();
+      int sumMinus = item.getValue();
+      if (sets.containsKey(item.getKey() + 1))
+        sumPlus += sets.get(item.getKey() + 1);
+      if (sets.containsKey(item.getKey() - 1))
+        sumMinus += sets.get(item.getKey() - 1);
+      if(max == null) {
+        max = sumPlus > sumMinus ? sumPlus : sumMinus;
+        continue;
+      }
+      
+      if (sumPlus > max)
+        max = sumPlus;
+      if (sumMinus > max)
+        max = sumMinus;
+    }
+
+    return max;
   }
 
 }
