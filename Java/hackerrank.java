@@ -310,35 +310,37 @@ class Result {
    *  n x n matrix of distinct positive integers from 1 to n^2, where the sum of 
    *  any row, column, or diagonal of length n is always equal to the same number;
    * 
-   * @param s 3x3 matrix of numbers [1-9];
+   *  Solution combinations solved by hand, (all are rotation/symmetric transformation of first combination)
+   * 
+   * @param s 3x3 matrix of DISTINCT numbers [1-9];
    * @return
    */
-  public static boolean checkArray(List<List<Integer>> s, Map<Integer, Integer> t) {
-    // int[8] represents 0-2 rows, 3-5 cols, 6,7 diags
-    int[] sums = new int[8];
-    for (int i = 0; i < s.size(); i++) {
-      List<Integer> row = s.get(i);
-      sums[i] = row.stream().reduce(0, (a1, a2) -> a1+ a2);
-      sums[i + 3] = s.get(0).get(i) + s.get(1).get(i) + s.get(2).get(i);
-    }
-    sums[6] = s.get(0).get(0) + s.get(1).get(1) + s.get(2).get(2);
-    sums[7] = s.get(0).get(2) + s.get(1).get(1) + s.get(2).get(0);
-    int toCheck = sums[0];
-    for (int sum: sums) {
-      if(sum != toCheck) return false; 
-    }
-    return true;
-  }
-
   public static int formingMagicSquare(List<List<Integer>> s) {
-    boolean isFixed = false;
-    Map<Integer, Integer> dict = new HashMap<Integer, Integer>();
-    while (!isFixed) {
+    int[][] solutionCombinations = {
+      {2,7,6,9,5,1,4,3,8}, 
+      {4,9,2,3,5,7,8,1,6}, 
+      {8,3,4,1,5,9,6,7,2}, 
+      {6,1,8,7,5,3,2,9,4}, 
+      {6,7,2,1,5,9,8,3,4}, 
+      {2,9,4,7,5,3,6,1,8}, 
+      {4,3,8,9,5,1,2,7,6}, 
+      {8,1,6,3,5,7,4,9,2}
+    };
 
-      isFixed = checkArray(s, dict);
+    Integer minError = null;
+    for(int[] solution: solutionCombinations) {
+      int sum = 0;
+      for (int i = 0; i < s.size(); i++) {
+        for (int j = 0; j < s.size(); j++) {
+          System.out.println(solution[((i * 3) + j)]);
+          sum += Math.abs(solution[((i * 3) + j)] - s.get(i).get(j));
+        }
+      }
+      if (minError == null) minError = sum;
+      if (sum < minError) minError = sum;
     }
     
-    return 0;
+    return minError;
   }
 
 }
