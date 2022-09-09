@@ -451,4 +451,59 @@ class Result {
 
     return area;
   }
+
+  /**
+   * Calculate the growth of a tree given n cycles
+   * 
+   * @param n - number of cycles for growth
+   * @return size of tree
+   */
+  public static int utopianTree(int n) {
+    int sum = 1;
+    for (int i = 0; i < n; i++) {
+      if (i % 2 == 0) {
+        sum *= 2;
+      } else {
+        sum += 1;
+      }
+    }
+    return sum;
+  }
+
+  /**
+   * given a list calculate the number above 0 > k
+   * 
+   * @param k - Threshold to cancel class
+   * @param a - list of students arrival times
+   * @return "Yes" || "No" - cancelled or not
+   */
+  public static String angryProfessor(int k, List<Integer> a) {
+    int sum = 0;
+    for (int time : a) {
+      if (time <= 0)
+        sum++;
+    }
+    if (sum >= k)
+      return "YES";
+    return "NO";
+  }
+
+  /**
+   * if m (>i <j) % k == 0 add to sum 
+   * @param i - starting day
+   * @param j - ending day
+   * @param k - divisor
+   * @return sum of above formula
+   */
+  public static int beautifulDays(int i, int j, int k) {
+    int sum = 0;
+    for(int m = i; m <= j; m++) {
+      StringBuilder toRevert = new StringBuilder();
+      toRevert.append(String.valueOf(m));
+      toRevert.reverse();
+      int newNum = Integer.parseInt(toRevert.toString());
+      if(Math.abs(m - newNum) % k == 0) sum ++;
+    }
+    return sum;
+  }
 }
