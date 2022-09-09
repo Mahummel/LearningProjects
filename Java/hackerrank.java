@@ -408,39 +408,25 @@ class Result {
         results.add(1);
         continue;
       }
-      int res = (binarySearch(ranked, score, 0));
+      int res = (helpers.binarySearch(ranked, score, 0));
       results.add(res);
     }
     return results;
   }
 
   /**
-   * Helper function created for climbing leaderboard
-   * @param toSearch - an array to search, must be sorted with no duplicates
-   * @param toFind - a number to find
-   * @param currentIndex - index to track to send back
-   * @return index of where number would be, or be between.
+   * Given list, return the highest difference between the list and k
+   * @param k - jump height of character
+   * @param height - list of obstacles
+   * @return difference between k and highest value of height list
    */
-  public static int binarySearch(List<Integer> toSearch, int toFind, int currentIndex) {
-    int middle = (int) Math.floor(toSearch.size() / 2);
-
-    if (toSearch.size() < 2) {
-      if (toSearch.get(0) > toFind)
-        return currentIndex + 2;
-      if (toSearch.get(0) < toFind)
-        return currentIndex;
-      return currentIndex + 1;
+  public static int hurdleRace(int k, List<Integer> height) {
+    int max = 0;
+    for(int jump: height) {
+      if( jump > k && jump - k > max) {
+        max = jump - k;
+      }
     }
-
-    int newIndex;
-    if (toSearch.get(middle) > toFind) {
-      newIndex = currentIndex == 0 ? middle : currentIndex + middle;
-      return binarySearch(toSearch.subList(middle, toSearch.size()), toFind, newIndex);
-    } else if (toSearch.get(middle) < toFind) {
-      newIndex = currentIndex;
-      return binarySearch(toSearch.subList(0, middle), toFind, newIndex);
-    } else {
-      return currentIndex + middle + 1;
-    }
+    return max;
   }
 }
