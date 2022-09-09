@@ -416,17 +416,39 @@ class Result {
 
   /**
    * Given list, return the highest difference between the list and k
-   * @param k - jump height of character
+   * 
+   * @param k      - jump height of character
    * @param height - list of obstacles
    * @return difference between k and highest value of height list
    */
   public static int hurdleRace(int k, List<Integer> height) {
     int max = 0;
-    for(int jump: height) {
-      if( jump > k && jump - k > max) {
+    for (int jump : height) {
+      if (jump > k && jump - k > max) {
         max = jump - k;
       }
     }
     return max;
+  }
+
+  /**
+   * 
+   * @param h    - height of letters in mm, 1mm
+   * @param word - word to parse
+   * @return calculated area of highlighted word
+   */
+  public static int designerPdfViewer(List<Integer> h, String word) {
+    int area;
+    int max = 0;
+
+    for (char ch : word.toCharArray()) {
+      int value = h.get((int) ch - 97);
+      if (value > max)
+        max = value;
+    }
+
+    area = max * word.length();
+
+    return area;
   }
 }
