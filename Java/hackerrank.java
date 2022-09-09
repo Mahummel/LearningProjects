@@ -375,11 +375,11 @@ class Result {
         sumPlus += sets.get(item.getKey() + 1);
       if (sets.containsKey(item.getKey() - 1))
         sumMinus += sets.get(item.getKey() - 1);
-      if(max == null) {
+      if (max == null) {
         max = sumPlus > sumMinus ? sumPlus : sumMinus;
         continue;
       }
-      
+
       if (sumPlus > max)
         max = sumPlus;
       if (sumMinus > max)
@@ -389,4 +389,58 @@ class Result {
     return max;
   }
 
+  /**
+   * Given a set of ranked players, rank the current players scores. Duplicates
+   * count as the same rank
+   * 
+   * NOTE Binary search created as helper function
+   * 
+   * @param ranked - Previously set ranked scores
+   * @param player - Current Players scores
+   * @return A list of the players ranks on each score
+   */
+  public static List<Integer> climbingLeaderboard(List<Integer> ranked, List<Integer> player) {
+    List<Integer> results = new ArrayList<Integer>();
+
+    ranked = ranked.stream().distinct().collect(Collectors.toList());
+    for (int score : player) {
+      if (score >= ranked.get(0)) {
+        results.add(1);
+        continue;
+      }
+      int res = (binarySearch(ranked, score, 0));
+      results.add(res);
+    }
+    return results;
+  }
+
+  /**
+   * Helper function created for climbing leaderboard
+   * @param toSearch - an array to search, must be sorted with no duplicates
+   * @param toFind - a number to find
+   * @param currentIndex - index to track to send back
+   * @return index of where number would be, or be between.
+   */
+  public static int binarySearch(List<Integer> toSearch, int toFind, int currentIndex) {
+    int middle = (int) Math.floor(toSearch.size() / 2);
+
+    if (toSearch.size() < 2) {
+      if (toSearch.get(0) > toFind)
+        return currentIndex + 2;
+      if (toSearch.get(0) < toFind)
+        return currentIndex;
+      return currentIndex + 1;
+    }
+
+    int newIndex;
+    if (toSearch.get(middle) > toFind) {
+      newIndex = currentIndex == 0 ? middle : currentIndex + middle;
+      return binarySearch(toSearch.subList(middle, toSearch.size()), toFind, newIndex);
+    } else if (toSearch.get(middle) < toFind) {
+      newIndex = currentIndex;
+      return binarySearch(toSearch.subList(0, middle), toFind, newIndex);
+    } else {
+      return currentIndex + middle + 1;
+    }
+  }
 }
