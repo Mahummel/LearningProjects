@@ -27,7 +27,36 @@ public class Data_Structures {
     temp = null;
     return a;
   }
+
+  /**
+   * Using foward finite difference
+   * NOTE: Used Forums to help with answer
+   * 
+   * @param n       - size of queries
+   * @param queries - 3 parts start, end, value
+   * @return - largest value
+   */
+  public static long arrayManipulation(int n, List<List<Integer>> queries) {
+    long[] temp = new long[n];
+    for (List<Integer> query : queries) {
+      int low = query.get(0) - 1;
+      int high = query.get(1) - 1;
+      long value = query.get(2);
+      temp[low] += value;
+      if (high < n - 1)
+        temp[high + 1] -= value;
+    }
+    long maximum = temp[0];
+    long sum = temp[0];
+    for (int i = 1; i < n; i++) {
+      sum += temp[i];
+      maximum = Math.max(maximum, sum);
+    }
+    return maximum;
+
+  }
+
   public static void main(String[] args) {
-    
+
   }
 }
