@@ -1,7 +1,7 @@
 import java.util.List;
 
 // Separation of any and all helper functions created for hackerrank problems
-public class helpers {
+public class Helpers {
     /**
    * Helper function created for climbing leaderboard
    * @param toSearch - an array to search, must be sorted with no duplicates

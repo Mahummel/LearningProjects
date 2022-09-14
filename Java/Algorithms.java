@@ -1,4 +1,3 @@
-
 // Imports used in hackerrank, Unused are there so i'm restricted to only what website allows;
 import java.io.*;
 import java.math.*;
@@ -12,7 +11,7 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class Result {
+public class Algorithms {
 
   /*
    * Complete the 'breakingRecords' function below.
@@ -489,7 +488,8 @@ class Result {
   }
 
   /**
-   * if m (>i <j) % k == 0 add to sum 
+   * if m (>i <j) % k == 0 add to sum
+   * 
    * @param i - starting day
    * @param j - ending day
    * @param k - divisor
@@ -497,13 +497,49 @@ class Result {
    */
   public static int beautifulDays(int i, int j, int k) {
     int sum = 0;
-    for(int m = i; m <= j; m++) {
+    for (int m = i; m <= j; m++) {
       StringBuilder toRevert = new StringBuilder();
       toRevert.append(String.valueOf(m));
       toRevert.reverse();
       int newNum = Integer.parseInt(toRevert.toString());
-      if(Math.abs(m - newNum) % k == 0) sum ++;
+      if (Math.abs(m - newNum) % k == 0)
+        sum++;
     }
     return sum;
+  }
+
+  /**
+   * day 1 starts at 5, Math.floor(day before / 2) * 3 after
+   * 
+   * @param n - number of days of advertising
+   * @return number of likes from the advertisement
+   */
+  public static int viralAdvertising(int n) {
+    int liked = 2;
+    int shared = 5;
+    for (int i = 1; i < n; i++) {
+      int newPeople = (int) Math.floor(shared / 2);
+      shared = newPeople * 3;
+      liked += (int) Math.floor(shared / 2);
+    }
+
+    return liked;
+  }
+
+  /**
+   * 
+   * @param n
+   * @param m
+   * @param s
+   * @return
+   */
+  public static int saveThePrisoner(int n, int m, int s) {
+    // Write your code here
+    return 0;
+  }
+
+  
+  public static void main(String[] args) {
+    
   }
 }
