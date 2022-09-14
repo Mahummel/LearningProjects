@@ -407,7 +407,7 @@ public class Algorithms {
         results.add(1);
         continue;
       }
-      int res = (helpers.binarySearch(ranked, score, 0));
+      int res = (Helpers.binarySearch(ranked, score, 0));
       results.add(res);
     }
     return results;
@@ -538,7 +538,7 @@ public class Algorithms {
     return 0;
   }
 
-  
+
   public static void main(String[] args) {
     
   }
