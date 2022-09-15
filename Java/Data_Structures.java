@@ -56,6 +56,88 @@ public class Data_Structures {
 
   }
 
+  /** Singly linked list section **/
+  /** Class Given by hackkerank *s */
+
+  static class SinglyLinkedListNode {
+    public int data;
+    public SinglyLinkedListNode next;
+
+    public SinglyLinkedListNode(int nodeData) {
+      this.data = nodeData;
+      this.next = null;
+    }
+  }
+
+  static class SinglyLinkedList {
+    public SinglyLinkedListNode head;
+    public SinglyLinkedListNode tail;
+
+    public SinglyLinkedList() {
+      this.head = null;
+      this.tail = null;
+    }
+
+    public void insertNode(int nodeData) {
+      SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
+
+      if (this.head == null) {
+        this.head = node;
+      } else {
+        this.tail.next = node;
+      }
+
+      this.tail = node;
+    }
+
+    /**
+     * Problem 1: print linked list
+     * 
+     * @param head - head node of linked list
+     */
+    static void printLinkedList(SinglyLinkedListNode head) {
+      while (head != null) {
+        System.out.println(head.data);
+        head = head.next;
+      }
+    }
+
+    /**
+     * Problem 2: append to tail of linked list
+     * 
+     * @param head - start of linked list
+     * @param data - data to create new node at tail
+     */
+    static SinglyLinkedListNode insertNodeAtTail(SinglyLinkedListNode head, int data) {
+      SinglyLinkedListNode node = new SinglyLinkedListNode(data);
+      if (head == null) {
+        head = node;
+        return head;
+      } else {
+        SinglyLinkedListNode base = head;
+        while (head.next != null) {
+          head = head.next;
+        }
+        head.next = node;
+        return base;
+      }
+    }
+
+    /**
+     * Problem 3: Insert node at head
+     * 
+     * Insert at head is much easier, as you link the remainder of the list to a newly created node
+     * @param llist - remainder of linked list to append
+     * @param data - data to create new node
+     * @return - reference to head
+     */
+    static SinglyLinkedListNode insertNodeAtHead(SinglyLinkedListNode llist, int data) {
+      SinglyLinkedListNode node = new SinglyLinkedListNode(data);
+      node.next = llist;
+      return node;
+    }
+  }
+
   public static void main(String[] args) {
 
   }
