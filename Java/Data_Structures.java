@@ -164,11 +164,10 @@ public class Data_Structures {
       return base;
     }
 
-
     /**
      * Problem 5: Delete a node at location
      * 
-     * @param llist - Given linked list
+     * @param llist    - Given linked list
      * @param position - Position of node to delete
      * @return - linked list without node
      */
@@ -178,13 +177,112 @@ public class Data_Structures {
         base = llist.next;
         return base;
       }
-      for(int i = 0; i < position - 1; i++) {
-        if (llist.next != null) llist = llist.next;
+      for (int i = 0; i < position - 1; i++) {
+        if (llist.next != null)
+          llist = llist.next;
       }
       SinglyLinkedListNode previous = llist;
-      if (llist.next != null) llist = llist.next;
-      previous.next = llist.next; 
+      if (llist.next != null)
+        llist = llist.next;
+      previous.next = llist.next;
       return base;
+    }
+
+    /**
+     * Problem 6: Traverse List in reverse order;
+     * 
+     * @param llist - Linked list given
+     */
+    public static void reversePrint(SinglyLinkedListNode llist) {
+      List<Integer> arr = new ArrayList<Integer>();
+      while (llist != null) {
+        arr.add(llist.data);
+        llist = llist.next;
+      }
+      for (int i = arr.size() - 1; i >= 0; i--) {
+        System.out.println(arr.get(i));
+      }
+    }
+
+    /**
+     * Reverse a singly linked list;
+     * 
+     * @param llist - original list
+     * @return - reversed list;
+     */
+    public static SinglyLinkedListNode reverse(SinglyLinkedListNode llist) {
+      // Write your code here
+      List<Integer> arr = new ArrayList<Integer>();
+      SinglyLinkedList reversed = new SinglyLinkedList();
+
+      while (llist != null) {
+        arr.add(llist.data);
+        llist = llist.next;
+      }
+      for (int i = arr.size() - 1; i >= 0; i--) {
+        reversed.insertNode(arr.get(i));
+      }
+      return reversed.head;
+    }
+  }
+
+  /**
+   * scan input string list to compare lists
+   * line 1: number of test cases T, then format as follows;
+   * line 2: size of list 1 = m;
+   * line 3 -> 3+m:  items in list 1;
+   * line 3+m+1: size of list 2 = n;
+   * line 3 + m + 2 -> 3 + m + 2 + n: items in list 2
+   * repeat T times
+   * 
+   * output: print 1 if list 1 == list 2, or 0 if not, repeat T times 
+   */
+  public static void fromScratch() {
+    Scanner scanner = new Scanner(System.in);
+    boolean same = true;
+    int counter = 0;
+    int listOneLength = 0;
+    int listTwoLength = 0;
+    int[] listOne = new int[] {};
+
+    while (scanner.hasNext()) {
+      switch (counter) {
+        case 0:
+          counter++;
+          scanner.nextInt();
+          break;
+        case 1:
+          listOneLength = scanner.nextInt();
+          counter++;
+          break;
+        case 2:
+          listOne = new int[listOneLength];
+          for (int i = 0; i < listOneLength; i++) {
+            listOne[i] = scanner.nextInt();
+          }
+          counter++;
+          break;
+        case 3:
+          listTwoLength = scanner.nextInt();
+          counter++;
+          break;
+        case 4:
+          for (int i = 0; i < listTwoLength; i++) {
+            if (listOneLength == listTwoLength) {
+              if (listOne[i] != scanner.nextInt())
+                same = false;
+            } else {
+              scanner.nextInt();
+            }
+          }
+          if (listOneLength != listTwoLength)
+            same = false;
+          counter = 1;
+          System.out.println(same ? 1 : 0);
+          same = true;
+        default:
+          break;
+      }
     }
   }
 
