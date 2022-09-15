@@ -126,15 +126,65 @@ public class Data_Structures {
     /**
      * Problem 3: Insert node at head
      * 
-     * Insert at head is much easier, as you link the remainder of the list to a newly created node
+     * Insert at head is much easier, as you link the remainder of the list to a
+     * newly created node
+     * 
      * @param llist - remainder of linked list to append
-     * @param data - data to create new node
+     * @param data  - data to create new node
      * @return - reference to head
      */
     static SinglyLinkedListNode insertNodeAtHead(SinglyLinkedListNode llist, int data) {
       SinglyLinkedListNode node = new SinglyLinkedListNode(data);
       node.next = llist;
       return node;
+    }
+
+    /**
+     * Problem 4: Insert node at a position
+     * 
+     * @param llist    - given linked list
+     * @param data     - new node to create with data
+     * @param position - position to insert
+     * @return base head reference with new list;
+     */
+    public static SinglyLinkedListNode insertNodeAtPosition(SinglyLinkedListNode llist, int data, int position) {
+      // Write your code here
+      SinglyLinkedListNode base = llist;
+      SinglyLinkedListNode previous;
+      SinglyLinkedListNode node = new SinglyLinkedListNode(data);
+      for (int i = 0; i < position - 1; i++) {
+        if (llist.next != null)
+          llist = llist.next;
+      }
+      previous = llist;
+      if (llist.next != null)
+        llist = llist.next;
+      previous.next = node;
+      node.next = llist;
+      return base;
+    }
+
+
+    /**
+     * Problem 5: Delete a node at location
+     * 
+     * @param llist - Given linked list
+     * @param position - Position of node to delete
+     * @return - linked list without node
+     */
+    public static SinglyLinkedListNode deleteNode(SinglyLinkedListNode llist, int position) {
+      SinglyLinkedListNode base = llist;
+      if (position == 0) {
+        base = llist.next;
+        return base;
+      }
+      for(int i = 0; i < position - 1; i++) {
+        if (llist.next != null) llist = llist.next;
+      }
+      SinglyLinkedListNode previous = llist;
+      if (llist.next != null) llist = llist.next;
+      previous.next = llist.next; 
+      return base;
     }
   }
 
