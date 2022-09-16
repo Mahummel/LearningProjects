@@ -1,10 +1,10 @@
 package JavaPackages;
 
-// Imports used in hackerrank, Unused are there so i'm restricted to only what website allows;
+// Imports used in hackerrank;
 import java.util.*;
 import java.util.stream.*;
 
-public class Data_Structures {
+public class LinkedList {
   public static List<Integer> reverseArray(List<Integer> a) {
     int middle = a.size() / 2;
     int[] temp = new int[a.size()];

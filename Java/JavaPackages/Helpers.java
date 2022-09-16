@@ -1,7 +1,7 @@
 package JavaPackages;
 import java.util.List;
 
-import JavaPackages.Data_Structures.SinglyLinkedList;
+import JavaPackages.LinkedList.SinglyLinkedList;
 
 // Separation of any and all helper functions created for hackerrank problems
 public class Helpers {
