@@ -1,4 +1,4 @@
-package JavaPackages;
+package Hackerrank;
 // Imports used in hackerrank;
 import java.util.*;
 import java.util.stream.*;
