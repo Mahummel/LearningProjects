@@ -216,6 +216,90 @@ public class LinkedList {
       }
       return reversed.head;
     }
+
+    /**
+     * Returns value of item x from tail;
+     * 
+     * @param llist
+     * @param positionFromTail
+     * @return
+     */
+    public static int getNode(SinglyLinkedListNode llist, int positionFromTail) {
+      List<Integer> arr = new ArrayList<Integer>();
+      while (llist != null) {
+        arr.add(llist.data);
+        llist = llist.next;
+      }
+      return positionFromTail + 1 <= arr.size() ? arr.get(arr.size() - (positionFromTail + 1)) : -1;
+    }
+
+    /**
+     * Remove duplicate items from sorted linked list
+     * 
+     * @param llist - list given
+     * @return head of linked list without duplicates
+     */
+    public static SinglyLinkedListNode removeDuplicates(SinglyLinkedListNode llist) {
+      SinglyLinkedListNode base = llist;
+      SinglyLinkedListNode previousNode = null;
+      Integer previousValue = null;
+      while (llist != null) {
+        if (previousValue == null) {
+          previousValue = llist.data;
+          previousNode = llist;
+        } else {
+          if (previousValue == llist.data && previousNode != null) {
+            previousNode.next = llist.next;
+          } else {
+            previousValue = llist.data;
+            previousNode = llist;
+          }
+        }
+        llist = llist.next;
+      }
+      return base;
+    }
+
+    /**
+     * Check memeory address of obj, if address exists in saved storage, its cyclic.
+     * @param head - head node of linked list
+     * @return boolean, whether or not linked list cycles
+     */
+    static boolean hasCycle(SinglyLinkedListNode head) {
+      List<Integer> codes = new ArrayList<Integer>();
+      while (head != null) {
+        for (int code : codes) {
+          if (code == head.hashCode())
+            return true;
+        }
+        codes.add(head.hashCode());
+        head = head.next;
+      }
+      return false;
+    }
+
+    /**
+     * find node where both nodes merge
+     * Constraits: The lists will merge, head1 && head2 != null head1 != head2
+     * 
+     * @param head1 - head of linked list 1
+     * @param head2 - head of linekd list 2
+     * @return data value of the node where both lists converge
+     */
+    static int findMergeNode(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+      List<Integer> codes = new ArrayList<Integer>();
+      while(head1 != null) {
+        codes.add(head1.hashCode());
+        head1 = head1.next;
+      }
+      while(head2 != null) {
+        for (int code: codes) {
+          if(head2.hashCode() == code) return head2.data;
+        }
+        head2 = head2.next;
+      }      
+      return -1;
+    }
   }
 
   /**
