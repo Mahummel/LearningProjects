@@ -1,4 +1,7 @@
+package JavaPackages;
 import java.util.List;
+
+import JavaPackages.Data_Structures.SinglyLinkedList;
 
 // Separation of any and all helper functions created for hackerrank problems
 public class Helpers {
@@ -30,5 +33,28 @@ public class Helpers {
     } else {
       return currentIndex + middle + 1;
     }
+  };
+
+  public static SinglyLinkedList mergeSort(SinglyLinkedList listOne, SinglyLinkedList listTwo) {
+    SinglyLinkedList mergedList = new SinglyLinkedList();
+    
+    while (listOne.head != null && listTwo.head != null) {
+      if(listOne.head.data < listTwo.head.data) {
+        mergedList.insertNode(listOne.head.data);
+        listOne.head = listOne.head.next;
+      } else {
+        mergedList.insertNode(listTwo.head.data);
+        listTwo.head = listTwo.head.next;
+      }
+    }
+    while(listOne.head != null) {
+      mergedList.insertNode(listOne.head.data);
+      listOne.head = listOne.head.next;
+    }
+    while(listTwo.head != null) {
+      mergedList.insertNode(listTwo.head.data);
+      listTwo.head = listTwo.head.next;
+    }
+    return mergedList;
   }
 }

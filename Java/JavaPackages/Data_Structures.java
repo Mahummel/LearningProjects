@@ -1,16 +1,8 @@
+package JavaPackages;
 
 // Imports used in hackerrank, Unused are there so i'm restricted to only what website allows;
-import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.function.*;
-import java.util.regex.*;
 import java.util.stream.*;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 
 public class Data_Structures {
   public static List<Integer> reverseArray(List<Integer> a) {
@@ -59,7 +51,7 @@ public class Data_Structures {
   /** Singly linked list section **/
   /** Class Given by hackkerank *s */
 
-  static class SinglyLinkedListNode {
+  public static class SinglyLinkedListNode {
     public int data;
     public SinglyLinkedListNode next;
 
@@ -69,7 +61,7 @@ public class Data_Structures {
     }
   }
 
-  static class SinglyLinkedList {
+  public static class SinglyLinkedList {
     public SinglyLinkedListNode head;
     public SinglyLinkedListNode tail;
 
@@ -230,14 +222,14 @@ public class Data_Structures {
    * scan input string list to compare lists
    * line 1: number of test cases T, then format as follows;
    * line 2: size of list 1 = m;
-   * line 3 -> 3+m:  items in list 1;
+   * line 3 -> 3+m: items in list 1;
    * line 3+m+1: size of list 2 = n;
    * line 3 + m + 2 -> 3 + m + 2 + n: items in list 2
    * repeat T times
    * 
-   * output: print 1 if list 1 == list 2, or 0 if not, repeat T times 
+   * output: print 1 if list 1 == list 2, or 0 if not, repeat T times
    */
-  public static void fromScratch() {
+  public static void fromScratch(String[] args) {
     Scanner scanner = new Scanner(System.in);
     boolean same = true;
     int counter = 0;
@@ -284,9 +276,68 @@ public class Data_Structures {
           break;
       }
     }
+    scanner.close();
+  }
+
+  /**
+   * Merge two lists together smallest to largest
+   * 
+   * format as follows:
+   * T - first line, number of test cases
+   * N - next line, length of first list
+   * next N - the first list
+   * M - next line, length of second list
+   * next M - the second list
+   * repeat t times
+   * 
+   * @param args - string array in above format all integers;
+   */
+  public static void mergeLists(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int stage = 0;
+    int listOneLength = 0;
+    int listTwoLength = 0;
+    SinglyLinkedList listOne = new SinglyLinkedList();
+    SinglyLinkedList listTwo = new SinglyLinkedList();
+    SinglyLinkedListNode merged = null;
+    while (scanner.hasNext()) {
+      switch (stage) {
+        case 0:
+          scanner.nextInt();
+          stage++;
+          break;
+        case 1:
+          listOneLength = scanner.nextInt();
+          stage++;
+          break;
+        case 2:
+          for (int i = 0; i < listOneLength; i++) {
+            listOne.insertNode(scanner.nextInt());
+          }
+          stage++;
+          break;
+        case 3:
+          listTwoLength = scanner.nextInt();
+          stage++;
+          break;
+        case 4:
+          for (int i = 0; i < listTwoLength; i++) {
+            listTwo.insertNode(scanner.nextInt());
+          }
+          merged = Helpers.mergeSort(listOne, listTwo).head;
+          while (merged != null) {
+            System.out.println(merged.data);
+            merged = merged.next;
+          }
+          stage = 1;
+          break;
+        default:
+          break;
+      }
+    }
+    scanner.close();
   }
 
   public static void main(String[] args) {
-
   }
 }
