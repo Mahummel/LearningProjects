@@ -6,4 +6,19 @@ fun saveThePrisoner(n: Int, m: Int, s: Int): Int {
   return if (position == 0) n else position
 }
 
+// Hackerrank Problem 2: a: array to manipulate, k: number of rotations, queries: indicies to report
+// position
+// Find position of each index in the queries list after k rotations on array a.
+fun circularArrayRotation(a: Array<Int>, k: Int, queries: Array<Int>): Array<Int> {
+  val rev :Array<Int> = a.copyOfRange(k, a.size)
+  rev.reverse();
+  val arr = rev + a.copyOfRange(0, k)
+  val ret = Array<Int>(queries.size) { _ -> 0 }
+  for(i in 0..queries.size - 1) {
+    val index = queries[i]
+    ret[i] = arr.get(index);
+  }
+  return ret;
+}
+
 fun main() {}
