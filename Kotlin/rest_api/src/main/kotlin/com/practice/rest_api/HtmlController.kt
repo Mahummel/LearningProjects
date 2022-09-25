@@ -20,12 +20,15 @@ class HtmlController(private val repository: ArticleRepository) {
     return "blog"
   }
 
+  // {} notation used to indicate path vars, as seen in @PathVariable
   @GetMapping("/article/{slug}")
   fun article(@PathVariable slug: String, model: Model): String {
+    // Each step checks for null, and continues if not null, else throws exception
     val article = repository
       .findBySlug(slug)
       ?.render()
       ?: throw ResponseStatusException(NOT_FOUND, "This article does not exist")
+    // If article, then set and return following
     model["title"] = article.title
     model["article"] = article
     return "article"
@@ -40,6 +43,7 @@ class HtmlController(private val repository: ArticleRepository) {
     addedAt.format()
   )
 
+  // Class dedicated to holding data from a database or other (hence data class)
   data class RenderArticle(
     val slug: String,
     val title: String,
