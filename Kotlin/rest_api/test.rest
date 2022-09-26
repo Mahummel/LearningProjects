@@ -1,0 +1,11 @@
+### Testing get all users
+GET Http://localhost:8080/api/user/
+
+### Testing get specific user
+GET Http://localhost:8080/api/user/Mahummel
+
+### Testing get all articles
+GET  Http://localhost:8080/api/article/
+
+### Testing get specific article
+GET Http://localhost:8080/api/article/first-blog-post
