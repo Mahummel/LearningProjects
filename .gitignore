@@ -1,5 +1,4 @@
 # C# ignores
-
 *_i.c
 *_p.c
 *.ilk
@@ -60,7 +59,9 @@ modulesbin/
 tempbin/
 
 # TS files
-dist/**/*
+dist
+# node modules
+node_modules
 
 # Python Data Files
 *.csv
@@ -70,5 +71,5 @@ dist/**/*
 # Exam Files
 practiceExams.java
 
-# node modules
-node_modules
+# Rest Files
+*.rest
