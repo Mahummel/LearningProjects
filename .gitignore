@@ -69,3 +69,6 @@ dist/**/*
 
 # Exam Files
 practiceExams.java
+
+# node modules
+node_modules
