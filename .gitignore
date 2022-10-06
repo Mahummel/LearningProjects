@@ -62,6 +62,7 @@ tempbin/
 dist
 # node modules
 node_modules
+.env
 
 # Python Data Files
 *.csv
