@@ -13,7 +13,7 @@ class GraphNode<T> {
     this.edges.push(node);
     if (isDirectional) node.edges.push(this);
   }
-  getId = () => {
+  getId = (): number => {
     return this.id;
   }
   getEdges = () => {
@@ -46,12 +46,12 @@ class Graph<T> {
 
   private traverseTo = (index: number) => {
     let visited = []
-    for (const base of this.nodes) {
-      if (visited.indexOf(base.getId()) !== -1) break;
-      visited.push(base.getId());
-      const target = this.traverseToNode(index, base, visited);
-      if (target) return target;
-    }
+      for (const base of this.nodes) {
+        if (visited.indexOf(base.getId()) !== -1) break;
+        visited.push(base.getId());
+        const target = this.traverseToNode(index, base, visited);
+        if (target) return target;
+      }
   }
 
   private traverseToNode = (index: number, node?: GraphNode<T>, visited?: number[]) => {
