@@ -1,4 +1,4 @@
-import * as assert from "assert";
+import { equal } from "assert";
 import { IMessageWriter, Salutation } from "./hello-world";
 
 interface IWrittenMessage {
@@ -23,7 +23,7 @@ function ExclaimWillWriteCorrectMessageToMessageWriter() {
   const writer = new SpyMessageWriter();
   const sut = new Salutation(writer);
   sut.Exclaim();
-  assert.equal(writer.WrittenMessage.get(), 'Hello World');
+  equal(writer.WrittenMessage.get(), 'Hello World');
 }
 
 ExclaimWillWriteCorrectMessageToMessageWriter();

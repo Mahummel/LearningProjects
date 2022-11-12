@@ -39,7 +39,7 @@ const asNumberBroken = (val: number | string): number => {
   return val as number;
 }
 /**
- * this is the working implementation as type assertion is forcing a numberic value
+ * this is the working implementation as type assertion is forcing a numeric value
  * at runtime, and so both would return numbers (or NaN if applicable)
  */
 const asNumber = (val: number | string): number => {

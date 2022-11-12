@@ -40,19 +40,16 @@ export class Salutation {
 /**
  * Main class to implement DI example for hello world
  */
-// class Main {
-//   private authentication: IIdentity = {
-//     isAuthenticated: true,
-//   }
-//   private writer: IMessageWriter = new SecureMessageWriter(
-//     new ConsoleMessageWriter(),
-//     this.authentication,
-//   )
+class Main {
+  private authentication: IIdentity = {
+    isAuthenticated: true,
+  }
+  private writer: IMessageWriter = new SecureMessageWriter(
+    new ConsoleMessageWriter(),
+    this.authentication,
+  )
 
-//   public execute(): void {
-//     this.writer.Write("hello");
-//   }
-// }
-
-// const main: Main = new Main();
-// main.execute();
+  public execute(): void {
+    this.writer.Write("hello");
+  }
+}
