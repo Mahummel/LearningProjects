@@ -25,7 +25,39 @@ fn main() {
     // vec! = Create a vector of size (second arg), and fill with (first arg)
     let mut pixels = vec![0; bounds.0 * bounds.1];
     // Passing &mut to an argument allows for mutation of the original, so pixels can now be overwritten by render.
-    render(&mut pixels, bounds, upper_left, lower_right);
+    // Below is a single thread variant of rendering
+    // render(&mut pixels, bounds, upper_left, lower_right);
+    // Multi Threaded Version:
+
+    // Use 8 threads
+    let threads = 8;
+    // rows of pixels per band (thread) (rounded up to make sure all pixels are included)
+    let rows_per_band = bounds.1 / threads + 1;
+    // Divide pixel buffer into bands, chunks_mut creates nonoverlapping slices
+    let bands: Vec<&mut [u8]> = pixels.chunks_mut(rows_per_band * bounds.0).collect();
+    // spawner is the argument passed into scope function, scope function makes sure all threads
+    // continue to completion before either returning Ok(), or an Err. unwrap is used to supply
+    // the user with the err if it occurs
+    crossbeam::scope(|spawner| {
+        // Iterate over the pixel buffer bands, keeping track of the index
+        // 'into_iter' gives each interation ownership of its contents (in this case its band)
+        // This ensures each thread can write to its own.
+        for (i, band) in bands.into_iter().enumerate() {
+            // Bounding box of each bands pixels
+            let top = rows_per_band * i;
+            let height = band.len() / bounds.0;
+            let band_bounds = (bounds.0, height);
+            let band_upper_left = pixel_to_point(bounds, (0, top), upper_left, lower_right);
+            let band_lower_right =
+                pixel_to_point(bounds, (bounds.0, top + height), upper_left, lower_right);
+            // create a thread to run its closure method(render), spawn creates a thread.
+            // argument given to move is another spawner, to create nested threads
+            spawner.spawn(move |_| {
+                render(band, band_bounds, band_upper_left, band_lower_right);
+            });
+        }
+    })
+    .unwrap();
 
     write_image(&args[1], &pixels, bounds).expect("Error writing to PNG file")
 }
