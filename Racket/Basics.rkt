@@ -186,7 +186,7 @@
     (fib-r (- n 1))
     (fib-r (- n 2))))))
 
-; iterative
+; iterative (O(n))
 (define (fib-i n)
   (define (iter a b count)
     (if (= count 0)
@@ -194,7 +194,242 @@
         (iter (+ a b) a (- count 1))))
   (iter 1 0 n))
 
+; iterative (O(logn))
+(define (fib-i-l n)
+  (define (iter a b p q count)
+    (cond
+      ((= count 0) b)
+      ((even? count)
+       ; computer p q
+       (iter a b p q (/ count 2)))
+      (else
+       (iter
+        (+ (* b q) (* a q) (* a p))
+        (+ (* b p) (* a q))
+        p
+        q
+        (- count 1)))))
+  (define (even? count)
+    (= (remainder count 2) 0))
+  (iter 1 0 0 1 n))
 
+; recursion
+(define (exp-r b n)
+  (if
+   (= 0 n)
+   1
+   (* b (exp-r b (- n 1)))))
+
+; iterative
+(define (exp-i b n)
+  (define (iter b counter product)
+    (if
+     (= counter 0)
+     product
+     (iter b
+           (- counter 1)
+           (* b product))))
+  (iter b n 1))
+
+; fast exp
+(define (fast-exp b n)
+  (define (square x)
+    (* x x))
+  (define (even? x)
+    (= (remainder x 2) 0))
+  (cond
+    ((= n 0) 1)
+    ((even? n) (square (fast-exp b (/ n 2))))
+    (else (* b (fast-exp b (- n 1))))))
+
+; Exercise: using operations double and half, design a multiplcation procedure analogous to fast-exp O(logn)
+
+; linear
+(define (multi a b)
+  (if
+   (= b 0)
+   0
+   (+ a (multi a (- b 1)))))
+
+; logn
+(define (multi-l a b)
+  (define (double x)
+    (* x 2))
+  (define (half x)
+    (if
+     (= (remainder x 2) 0)
+     (/ x 2)
+     x))
+  (cond
+    ((= b 0) 0)
+    ((= (remainder b 2) 0) (multi-l (double a) (half b)))
+    (else (+ a (multi-l a (- b 1))))))
+
+; Euclid's Algorithm
+(define (gcd a b)
+  (if
+   (= b 0)
+   a
+   (gcd b (remainder a b))))
+
+; Smallest divisor to test for primality
+(define (prime? n)
+  ; Smallest Divisor
+  (define (smallest-divisor n)
+    (define (find-divisor n test-divisor)
+      (cond
+        ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (+ test-divisor 1)))))
+    (define (divides? a b) (= (remainder b a) 0))
+    (define (square a)
+      (* a a))
+    (find-divisor n 2))
+  ; Use for prime testing
+  (= n (smallest-divisor n)))
+
+; The Fermat Test, if n is a prime number and a is any positive integer less than n
+; then a raised to n is congruent to a mod n
+; used to test primality: given n, pick a < n, and compute a^n mod n, if != a
+; then n is not prime, if its a, pick another number try again, each time with
+; more confidence of n's primality
+(define (fast-prime? n times)
+  (define (fermat-test n)
+    (try-it (+ 1 (random (- n 1)))))
+  (define (try-it a)
+    (= (expmod a n n) a))
+  (define (expmod base exp m)
+    (cond
+      ((= exp 0) 1)
+      ((even? exp)
+       (remainder
+        (square (expmod base (/ exp 2) m)) m))
+      (else
+       (remainder
+        (* base (expmod base (- exp 1) m)) m))))
+  (define (even? x)
+    (= (remainder x 2) 0))
+  (define (square x)
+    (* x x))
+  (cond
+    ((= times 0) true)
+    ((fermat-test n) (fast-prime? n (- times 1)))
+    (else false)))
+
+(define (timed-prime-test n)
+  (define (start-prime-test n start-time)
+    (if (fast-prime? n (- n 1))
+      (report-prime (- (current-milliseconds) start-time) n)
+      false))
+  (define (report-prime elapsed-time n)
+    (display " *** ")
+    (display elapsed-time)
+    (newline)
+    (display "Prime: ")
+    (display (smallest-divisor n))
+    true)
+  (newline)
+  (display n)
+  (start-prime-test n (current-milliseconds)))
+
+(define (find-3-prime n)
+  (define (iter i x)
+    (when (< i 3)
+        (if (timed-prime-test x)
+              (incr (+ i 1) x)
+              (incr i x))))
+  (define (incr i x)
+    (if (even? x)
+        (iter i (+ x 1))
+        (iter i (+ x 2))))
+  (define (even? x)
+    (= (remainder x 2) 0))
+  (iter 0 n))
+
+(define (smallest-divisor n)
+  (define (find-divisor n test-divisor)
+    (cond
+      ((> (square test-divisor) n) n)
+      ((divides? test-divisor n) test-divisor)
+      (else (find-divisor n (next test-divisor)))))
+  (define (divides? a b) (= (remainder b a) 0))
+  (define (square a)
+    (* a a))
+  (define (next a)
+    (if
+     (= a 2)
+     3
+     (+ a 2)))
+  (find-divisor n 2))
+
+; abstracting functions as parameters
+
+; Generic Constructor function, a function that produces a function
+(define (sum term a next b)
+  (if (> a b)
+      0
+      (+ (term a)
+         (sum term (next a) next b))))
+
+; use constructor to make a sum cube function
+(define (sum-cubes a b)
+  (define (cube n)
+    (* n n n))
+  (define (inc n) (+ n 1))
+  (sum cube a inc b))
+
+; sum integer function
+(define (sum-integers a b)
+  (define (identity x) x)
+  (define (inc n) (+ n 1))
+  (sum identity a inc b))
+
+; pi sum
+(define (pi-sum a b)
+  (define (pi-term x)
+    (/ 1.0 (* x (+ x 2))))
+  (define (pi-next x)
+    (+ x 4))
+  (sum pi-term a pi-next b))
+
+; integration base
+(define (integral f a b dx)
+  (define (add-dx x)
+    (+ x dx))
+    (* (sum f (+ a (/ dx 2.0)) add-dx b) dx))
+
+; Simpson's rule
+; approximation of integral by: h/3(y_0 + 4y_1 + 2y_2 + ... , + y_n) (4 odd, 2 even, 1 for n)
+; h = (b - a) / n and y(k) = f(a + kh)
+
+(define (s-integral f a b n)
+  (define (h)
+    (/ (- b a) n))
+  (define (even? x)
+    (= (remainder x 2) 0))
+  (define (mult x)
+    (cond
+      ((= 0 x) (f (calc x)))
+      ((= n x) (f (calc x)))
+      ((even? x) (* 2 (f (calc x))))
+      (else (* 4 (f (calc x))))))
+  (define (calc x)
+    (+ a (* x (h))))
+  (define (inc x)
+    (+ x 1))
+  (* (/ (h) 3) (sum mult 0 inc n)))
+
+; test integration from 0 to 2 of (4x^2 + 1) (2x - 3)
+; should be -2
+(define (test-integral x)
+  (define (square x)
+    (* x x))
+  (* (+ (* 4 (square x)) 1) (- (* 2 x) 3)))
+
+; displays -2, works!
+; (s-integral test-integral 0 2 100)
+
+; ------- TBI -------- ;
 
 ; Test variables
 (define testList `(1 2 3 4))
