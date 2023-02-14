@@ -1,0 +1,75 @@
+#!/bin/sh
+workingDir=$HOME/Desktop/PersonalProjects/LearningProjects/Shell
+
+
+# below works because an exit status for date of 0 was given
+if date
+then
+  echo "we're here"
+fi
+
+# if not using status codes, you can evaluate expressions\
+# most commonly used: eq, gt, lt, ge, le, ne
+if [ $[1 + 2] -eq 3 ]
+then
+  echo "My math is correct!"
+fi
+
+# If comparing strings, operators are slightly different
+# most commonly used: =, !-, <, >, -n (length > 0), -z (length of 0)
+# escape <, and > symbols to avoid output redirection
+if [ $USER = 'mahummel' ]
+then
+  echo "Correct user logged in"
+fi
+
+stringOne="baseball"
+stringTwo="hockey"
+
+if [ $stringOne \> $stringTwo ]
+then
+  echo "$stringOne is greater than $stringTwo"
+else
+  echo "$stringOne is less than $stringTwo"
+fi
+
+# File Comparisons
+# -d exists and is directory, -e exists, -f exists and is file
+# Others on page 274 of LinuxBasics
+
+if [ -d $HOME ]
+then
+  echo "Your home directory exists"
+  # cd $HOME
+  # ls -a
+else
+  echo "There is a problem finding the home directory"
+fi
+
+# Checking ownership of a file
+if [ -O $workingDir/conditionals ]
+then
+  echo "Ownership belongs to you"
+else
+  echo "You do not own"
+fi
+
+# Compound comparisons
+if [ -d $workingDir ] && [ -w $workingDir/conditionals ]
+then
+  echo "this is a writable file"
+else
+  echo "I cant write to this"
+  cd $workingDir
+  ls -a
+fi
+
+# Easier mathmatical comparisons
+# Note this book example throws an error
+# TODO: research topic when wifi is available
+# var1=10
+# if (( $val1 ** 2 > 90 ))
+# then
+#   (( val2 = $val1 ** 2 ))
+#   echo "The square of $val1 is $val2"
+# fi

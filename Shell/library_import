@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# import all functions with .
+. ./library_export
+
+val1=10
+val2=20
+
+multi val1

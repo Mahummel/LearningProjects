@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# Structure conventional:
+# for var in list
+# do
+#   commands
+# done
+
+# C style syntax for looping
+# for (( i = 1; i < 10; i++ ))
+# do
+#   echo $a
+# done
+
+# C style while syntax
+# while [test] // see test statements in ./conditionals
+# do
+#   statements
+# done
+
+# Ex:
+# var1=10
+# while [ $var1 -gt 0 ]
+# do
+#   echo $var1
+#   var1=$[ $var1 - 1 ]
+# done
+
+# Multi-statement while commands
+# if using bash, omit &&
+# var1=10
+# while echo $var1 && [ $var1 -ge 0 ]
+# do
+#   echo "This is inside the loop"
+#   var1=$[ $var1 - 1 ]
+# done
+
+# Until command (do while)
+# var1=10
+# until [ $var1 -lt 0 ]
+# do
+#   echo $var1
+#   var1=$[ $var1 - 1 ]
+# done
+
+# continue and break conditions
+# for (( i = 0; i < 10; i++ ))
+# do
+#   if [ $[ $i % 2 ] -eq 0 ]
+#   then  
+#     continue
+#   fi
+#   if [ $i -eq 7 ]
+#   then
+#     break
+#   fi
+#   echo $i
+# done
+
+# break multiple levels
+# for (( i = 0; i < 10; i++ ))
+# do
+#   echo "Outer loop $i"
+#   for (( j = 0; j < 10; j++ ))
+#   do
+#     echo "  Inner loop $j"
+#     if [ $i -eq 5 ]
+#     then
+#       break 2
+#     elif [ $j -eq 5 ]
+#     then
+#       break
+#     fi
+#   done
+# done
+
+# pipe a loops contents
+# Iterates, creates a string, sorts string and outputs
+# for state in "North Dakota" Connecticut Illinois Alabama
+# do
+#   echo "$state is next"
+# done | sort
+# echo "Completed"

@@ -1,0 +1,78 @@
+#!/bin/sh
+
+# Basic function notation
+# function dbl {
+#   read -p "Enter a value: " value
+#   echo $[ $value * 2 ]
+# }
+
+# result=`dbl`
+# echo $result
+
+# passing values to an function
+
+# function addSome {
+#   if [ $# -eq 0 ]
+#   then
+#     echo -1
+#   fi
+
+#   sum=0
+#   while [ -n "$1" ]
+#   do
+#     sum=$[ $sum + $1 ]
+#     shift
+#   done
+
+#   echo $sum
+# }
+
+# echo `addSome 1 4 2 1 4 2 23 33`
+
+# global variables
+# function triple {
+#   value=$[ $value * 3 ]
+# }
+
+# read -p "enter a value: " value
+# triple
+# echo "The new value is $value"
+
+# local variables - doesnt use globally defined temp
+# function dblLocal {
+#   local temp=$[ $value + 5 ]
+#   result=$[ $temp * 2 ]
+# }
+
+# temp=4
+# value=6
+
+# dblLocal
+
+# echo "Result: $result"
+# echo "temp: $temp"
+
+# passing arrays to functions
+# function testArrays {
+#   local newArr
+#   newArr=(`echo "$@"`)
+#   echo "newly created array: ${newArr[*]}"
+# }
+# testArr=(1 2 3 4 5 6)
+# echo "original = ${testArr[*]}"
+
+# testArrays ${testArr[*]}
+
+# recursive solution
+# utilize echo to capture result of previous
+
+# function fact {
+#   if [ $1 -eq 1 ]
+#   then
+#     echo 1
+#   else
+#     local temp=$[ $1 - 1 ]
+#     local result=`fact $temp`
+#     echo $[ $result * $1 ]
+#   fi
+# }

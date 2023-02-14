@@ -1,0 +1,77 @@
+#!/bin/sh
+
+# local env variable, (regular vars in other languages)
+exampleNumber=-10
+exampleNumber2=20
+exampleStringOne=oneWord
+exampleStringTwo='Two Words'
+#  Creating an array
+exampleArrayOne=(one two three four)
+exampleArrayTwo=(one 'two with flair' three four)
+
+# echo $exampleStringOne, $exampleStringTwo
+
+# mathmatical expressions
+# Page 250 of Linux Basics shows a list of options
+# expr $exampleNumber + $exampleNumber2
+
+# special characters for mathmatical expressions must be escaped
+# expr $exampleNumber \* $exampleNumber
+
+# Setting the results of any expression
+output=`expr $exampleNumber + $exampleNumber`
+# echo $output
+
+# easier method of same operation
+output2=$[$exampleNumber + 100]
+# echo $output2
+
+# Pipe operations to use the built in calculator tool for floating point arithmatic
+output3=`echo "scale=4; 3.44 / 5" | bc`
+# This is done in the format echo "options; expression | bc", or set options for calculator, give the expressions to evaluate, and return the calculator output
+# echo $output3
+
+# For larger operations, EOF can be used to pipe into the calculator
+output4=`bc << EOF 
+scale = 4
+al = (10.46 * 43.67)
+bl = (33.2 * 71)
+al + bl
+EOF
+`
+# echo $output4
+
+# Accessing array parts
+# echo ${exampleArrayTwo[1]}
+
+# Access all array sections
+# echo ${exampleArrayOne[*]}
+
+# Remove any variable
+unset exampleStringOne
+# Will print empty string
+# echo $exampleStringOne
+# echo 'End'
+
+# Alias for common commands
+alias e='echo'
+
+# prints our second string example
+# e $exampleStringTwo
+
+# touch creates a file, ls -al will show permissions
+# 3 sets, (owner, group, all)
+# 3 permissions rwx read write execute
+# binary system, 010 = -w-, 110 = rw-
+# Setting permissions means setting each group with numeric version of what you want access to
+# ex 753: rwx r-x -wx (111, 101, 011) user, group, all
+# default file permissions are 644 rw- r-- r--
+# unmask sets new fill permissions, subtracking from 666, default mask is 022, creating the 644 permissions
+# chmod changes permissions using numeric system
+# chown changes ownership, user . to differentiate between user and group
+# chwon mike file changes file user to mike
+# chown mike.mike changes file user and group to mike
+
+# EXIT STATUS, 0 indicates success 1 indicates a failure, other numbers can be used for debugging 0 - 255
+# echo $? // checks last used exit status code 
+exit 0

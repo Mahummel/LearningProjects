@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Example on exporting and importing a library (class)
+
+function add {
+  if [ $# -eq 2 ]
+  then
+    echo $[ $1 + $2 ]
+  else
+    echo 'Usage: "add [number1] [number2]"'
+  fi
+}
+
+function sub {
+    if [ $# -eq 2 ]
+  then
+    echo $[ $1 - $2 ]
+  else
+    echo 'Usage: "sub [number1] [number2]"'
+  fi
+}
+
+function multi {
+  if [ $# -eq 2 ]
+  then
+    echo $[ $1 * $2 ]
+  else
+    echo 'Usage: "multi [number1] [number2]"'
+  fi
+}

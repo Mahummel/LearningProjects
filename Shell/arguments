@@ -1,0 +1,111 @@
+#!/bin/sh
+
+# $# grabs the number of supplied parameters
+
+# Test 1 - Validation and testing user input
+# if [ $# -ne 1 ]
+# then
+#   echo "Please supply a single argument"
+#   exit 1
+# fi
+
+# fact=1
+
+# for (( number = 1; number <= $1; number++ ))
+# do
+#   fact=$[ $fact * $number ]
+# done
+# echo "Factorial of $1 is $fact"
+
+# Test 2 - $*, $@
+# $* and $@ difference
+# both return all arguments, $* combines into one, $@ creates array
+# count=1
+# for param in "$*"
+# do
+#   echo "\$* parameter #$count =  $param"
+#   count=$[ $count + 1 ]
+# done
+
+# count=1
+# for param in "$@"
+# do
+#   echo "\$@ parameter #$count =  $param"
+#   count=$[ $count + 1 ]
+# done
+
+# Test 3 - Shift keyword, can use number to skip multiple
+# Testing for unknown amount of command line arguments
+# Redesigned to test for # of args and skip accordingly
+# count=1
+# while [ -n "$1" ]
+# do
+#   if [ $[$# % 2] -eq 0 ]
+#   then
+#     echo "Skipping a count: $1, $2"
+#     count=$[ $count + 2 ]
+#     shift 2
+#     continue
+#   fi
+#   echo "Param count #$count: $1"
+#   count=$[ $count + 1 ]
+#   shift
+# done
+
+# Test 4 - accounting for options ( -a ) aka flags
+
+# while [ -n "$1" ]
+# do
+#   case "$1" in
+#   -a) echo "Found -a option";;
+#   -b) echo "Found -b option";;
+#   -c) echo "Found -c option";;
+#   *) echo "$1 is not an option";;
+#   esac
+#   shift
+# done
+
+# Test 5 - using options with parameters
+# Using a keywork (normally --) you can separate the options from parameters
+# If an option requires a parameter, make sure to test that a parameter exists
+# then shift the option + the number of parameters that option required
+
+# while [ -n "$1" ]
+# do
+#   case "$1" in
+#   -a) echo "Found -a option";;
+#   -b) echo "Found -b option";;
+#   -c) echo "Found -c option";;
+#   --) shift
+#       break;;
+#   *) echo "$1 is not an option";;
+#   esac
+#   shift
+# done
+
+# count=1
+# for param in $@
+# do
+#   echo "Found parameter: $param"
+# done
+
+# Test 6 - using getopts to define our options
+# See page 338 for standards in defining options
+# while getopts :ab:c opt
+# do
+#   case "$opt" in
+#   a) echo "Found -a option";;
+#   b) echo "Found -b option with param $OPTARG";;
+#   c) echo "Found -c option";;
+#   *) echo "Unknown option: $opt"
+#   esac
+# done
+
+# shift $[ $OPTIND - 1 ]
+
+# count=1
+# for param in "$@"
+# do
+#   echo "param count $count: $param"
+#   count=$[ $count + 1 ]
+# done

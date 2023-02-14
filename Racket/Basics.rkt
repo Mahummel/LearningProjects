@@ -429,7 +429,14 @@
 ; displays -2, works!
 ; (s-integral test-integral 0 2 100)
 
-; ------- TBI -------- ;
+; Implement an iterative version of the sum function
+(define (sum-i term a next b)
+  (define (iter a result)
+    (if
+     (> a b)
+     result
+     (iter (next a) (+ result (term a)))))
+  (iter a 0))
 
 ; Test variables
 (define testList `(1 2 3 4))

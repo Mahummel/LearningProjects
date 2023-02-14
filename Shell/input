@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# read command takes user input, -p gives a prompt
+# read -p "Enter name: " name
+# echo "Hello $name"
+
+# Reply is the default if no variable is given to read
+# read -p "Enter a number: "
+# fact=1
+# for (( i = 1; i < $REPLY; i++ ))
+# do
+#   fact=$[ $fact * $i ]
+# done
+# echo "The factorial of $REPLY is $fact"
+
+# -t [seconds] sets a timeout on user input
+# if read -t 5 -p "Enter a name: " name
+# then
+#   echo "Hello $name"
+# else
+#   echo
+#   echo "5 seconds has passed, program exit"
+# fi
+
+# Continue on character limits -n[numberofcharacters]
+# read -n1 -p "Do you want to continue [Y/N] " bool
+# case $bool in
+#   Y | y) echo ""
+#          echo "Continuing";;
+#   N | n) echo ""
+#          echo "Exiting"
+#          exit;;
+#   *)     echo ""
+#          echo "Invalid input exiting"
+#          exit;;
+# esac
+# echo "This is the end of the script"
+
+# Silent reading, "passwords" -s flag
+# read -s -p "Enter your password: "
+# echo ""
+# echo "$REPLY is not secure"
+
+# Reading from a file
+# count=1
+# cat input.txt | while read line
+# do
+#   echo "Line $count: $line"
+#   count=$[ $count + 1 ]
+# done
+# echo "Finished reading file"
