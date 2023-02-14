@@ -1,5 +1,5 @@
 class Square {
-  constructor (public width: number) {
+  constructor(public width: number) {
     this.width = width;
   }
 }
@@ -251,12 +251,12 @@ const bob = { name: "Bob" } as Person2;
 
 // Type declaration for mapping - this changes a string[] to a Person2[]
 const people = ['alice', 'bob', 'jan'].map(name => {
-  const person: Person2 = {name};
+  const person: Person2 = { name };
   return person
 });
 /* ------ OR ------ */
 const people2: Person2[] = ['alice', 'bob', 'jan'].map(
-  (name): Person2 => ({name})
+  (name): Person2 => ({ name })
 );
 
 // Non-null assertions
@@ -294,8 +294,8 @@ interface Options {
   darkMode?: boolean;
 }
 
-const setDarkMode = () => {};
-const createWindow = (options: Options) :void => {
+const setDarkMode = () => { };
+const createWindow = (options: Options): void => {
   if (options.darkMode) setDarkMode();
 }
 // Errors on specified darkmode sytax;
@@ -308,3 +308,24 @@ const createWindow = (options: Options) :void => {
 const o1: Options = document;
 const o2: Options = new HTMLAnchorElement;
 
+// mapped types and interfaces
+type State = {
+  userId: string;
+  pageTitle: string;
+  recentFiles: string[];
+  pageContents: string;
+}
+
+// This is repetative, and can be condensed into a mapped type/interface
+// type TopNavState = {
+//   userId: string;
+//   pageTitle: string;
+//   recentFiles: string[];
+// }
+
+type TopNavState = {
+  [k in 'userId' | 'pageTitle' | 'recentFiles']: State[k];
+}
+
+// using pick
+type PickTopNavState = Pick<State, 'userId' | 'pageTitle' | 'recentFiles'>

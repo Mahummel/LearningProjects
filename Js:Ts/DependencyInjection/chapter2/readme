@@ -1,1 +1,7 @@
 # Chapter 2: Writing tightly coupled code
+
+Summary: An example of how a layered application can quickly become highly dependent on its other parts,
+DI looks to reduce this, so the code in this application is not considered good practice and is written
+purely for the practice of translating C# to TS.
+
+Application: Simple Shopping App
