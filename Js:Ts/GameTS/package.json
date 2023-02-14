@@ -1,0 +1,16 @@
+{
+  "name": "GameRepo",
+  "version": "1.0.0",
+  "description": "A testing ground for creating games",
+  "main": "appication.ts",
+  "scripts": {
+    "test": "./bin/run-tests",
+    "demo": "ts-node application.ts",
+    "db-migrate": "./bin/create-migration"
+  },
+  "author": "Michael Hummel",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.18"
+  }
+}

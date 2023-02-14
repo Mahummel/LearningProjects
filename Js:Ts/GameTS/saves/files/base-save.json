@@ -1,0 +1,10 @@
+{
+  "name": "default",
+  "max_health": 10,
+  "current_health": 10,
+  "max_mana": 3,
+  "current_mana": 0,
+  "current_level": 1,
+  "current_exp": 0,
+  "exp_to_level": 10
+}

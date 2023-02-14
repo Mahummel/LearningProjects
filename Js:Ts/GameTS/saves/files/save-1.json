@@ -1,0 +1,10 @@
+{
+  "name": "Michael",
+  "max_health": 10,
+  "current_health": 4,
+  "max_mana": 23,
+  "current_mana": 5,
+  "current_level": 10,
+  "current_exp": 2042,
+  "exp_to_level": 230
+}

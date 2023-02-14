@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Generate new files based on timestamp and name provided;
+WD="$PWD/../postgres/";
+NAME=$1
+
+# Exit if no name provided 
+if [ -z "$1" ]
+then
+  echo "Usage: create-migration [name]"
+  exit 1
+fi
+
+cd $WD
+touch $NAME-up.sql
+touch $NAME-down.sql

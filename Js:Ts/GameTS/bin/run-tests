@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# Iterate through folders, find -test files, run to ensure all pass
+WORKING_DIR="$PWD/../*"
+
+for folder in $WORKING_DIR
+do
+  if [[ $folder == */node_modules ]]
+  then
+    continue
+  fi
+
+  if [ -d "$folder" ]
+  then
+    for file in `ls $folder`
+    do
+      if [[ $file == *-test.ts ]]
+      then
+        echo "Running: $file"
+        ts-node "$folder/$file"
+      fi
+    done
+  fi
+done
