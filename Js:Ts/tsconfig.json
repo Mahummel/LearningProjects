@@ -7,6 +7,39 @@
         "lib": [
             "es6",
             "dom"
-        ]
+        ],
+        "types": [
+            "node"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@DataStructures/*": [
+                "DataStructures/*"
+            ],
+            "@DependencyInjection/*": [
+                "DependencyInjection/*"
+            ],
+            "@GamesTS/*": [
+                "GamesTS/*"
+            ],
+            "@EffectiveTypescriptBook/*": [
+                "EffectiveTypescriptBook/*"
+            ],
+            "@JWT/*": [
+                "JWT/*"
+            ],
+            "@RestApi/*": [
+                "RestApi/*"
+            ],
+            "@WorkResearch/*": [
+                "WorkResearch/*"
+            ],
+            "@fp-ts/*": [
+                "fp-ts/*"
+            ]
+        },
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
     },
 }
