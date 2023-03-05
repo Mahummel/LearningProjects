@@ -74,3 +74,6 @@ practiceExams.java
 
 # Rest Files
 *.rest
+
+# Work research
+**/WorkResearch
